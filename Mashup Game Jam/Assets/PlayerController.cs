@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    [SerializeField] private GameObject shopUI;
+
     private GameManager manager;
 
     void Start()
@@ -33,6 +35,12 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Portal")
         {
             manager.ToRoom(other.GetComponent<Portal>().portalNum.ToString());
+        }
+
+        // If colliding with the shop, open the shop UI
+        if (other.tag == "Shop")
+        {
+            shopUI.SetAcitve(true);
         }
     }
 
