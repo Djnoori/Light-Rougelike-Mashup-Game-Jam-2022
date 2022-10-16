@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private GameObject player;
+
+    private Camera cam;
+
     private List<int> portalNums = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     [SerializeField] private GameObject[] portals = new GameObject[10];
+
+    [SerializeField] private Vector2[] playerPos = new Vector2[10];
+    [SerializeField] private Vector2[] cameraPos = new Vector2[10];
 
     void Awake()
     {
@@ -14,6 +21,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        player = FindObjectOfType<PlayerController>().gameObject;
+        cam = Camera.main;
+
         // Assigns each portal a random number
         for (int i = 0; i < 10; i++)
         {
@@ -23,8 +33,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void ToRoom(string name)
+    public void ToRoom(int num)
     {
-
+        player.transform.position = new Vector3(playerPos[num - 1].x, playerPos[num - 1].y, player.transform.position.z);
+        cam.transform.position = new Vector3(cameraPos[num - 1].x, cameraPos[num - 1].y, cam.transform.position.z);
     }
 }

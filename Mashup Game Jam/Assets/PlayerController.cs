@@ -22,11 +22,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Only run these things if the player is active
-        if (active == true)
-        {
-            Move();
-        }
+        Move();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -34,13 +30,14 @@ public class PlayerController : MonoBehaviour
         // If colliding with a portal, go to the room assigned to the portal
         if (other.tag == "Portal")
         {
-            manager.ToRoom(other.GetComponent<Portal>().portalNum.ToString());
+            manager.ToRoom(other.GetComponent<Portal>().portalNum);
         }
 
         // If colliding with the shop, open the shop UI
         if (other.tag == "Shop")
         {
-            shopUI.SetAcitve(true);
+            shopUI.SetActive(true);
+            active = false;
         }
     }
 
@@ -51,6 +48,20 @@ public class PlayerController : MonoBehaviour
         float vMove = Input.GetAxisRaw("Vertical");
 
         // Isn't it crazy that vMove has two Vs in it? Vs are pretty rare tbh
-        rb.velocity = new Vector2(hMove * speed, vMove * speed);
+        if (active == true)
+        {
+            rb.velocity = new Vector2(hMove * speed, vMove * speed);
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, 0);
+        }
+    }
+
+    // Closes the shop ui (called from the close button)
+    public void CloseShop()
+    {
+        shopUI.SetActive(false);
+        active = true;
     }
 }
