@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class ShopManager : MonoBehaviour
 {
-    [SerializeField] float moneyTextToDefaultTime;
+    [SerializeField] float upgradeTextToDefaultTime;
 
     private int upgrade1;
     private int upgrade2;
@@ -68,8 +69,8 @@ public class ShopManager : MonoBehaviour
             }
             else
             {
-                StartCoroutine(MoneyTextToDefault(moneyText.text, moneyTextToDefaultTime));
-                moneyText.text = "Not enough money!";
+                StartCoroutine(UpgradeTextToDefault(upgrade1Text, upgrade1Text.text, upgradeTextToDefaultTime));
+                upgrade1Text.text = "Not enough money!";
             }
         }
         else if (upgrade == 2)
@@ -82,8 +83,8 @@ public class ShopManager : MonoBehaviour
             }
             else
             {
-                StartCoroutine(MoneyTextToDefault(moneyText.text, moneyTextToDefaultTime));
-                moneyText.text = "Not enough money!";
+                StartCoroutine(UpgradeTextToDefault(upgrade2Text, upgrade2Text.text, upgradeTextToDefaultTime));
+                upgrade2Text.text = "Not enough money!";
             }
         }
         else if (upgrade == 3)
@@ -96,17 +97,17 @@ public class ShopManager : MonoBehaviour
             }
             else
             {
-                StartCoroutine(MoneyTextToDefault(moneyText.text, moneyTextToDefaultTime));
-                moneyText.text = "Not enough money!";
+                StartCoroutine(UpgradeTextToDefault(upgrade3Text, upgrade3Text.text, upgradeTextToDefaultTime));
+                upgrade3Text.text = "Not enough money!";
             }
         }
         moneyText.text = $"You have {playerController.money} money";
     }
 
-    // Switches the money text back to default; connected to BuyUpgrade()
-    private IEnumerator MoneyTextToDefault(string defaultText, float time)
+    // Switches the upgrade button's text back to default; connected to BuyUpgrade()
+    private IEnumerator UpgradeTextToDefault(TextMeshProUGUI upgrade, string defaultText, float time)
     {
         yield return new WaitForSeconds(time);
-        moneyText.text = defaultText;
+        upgrade.text = defaultText;
     }
 }
