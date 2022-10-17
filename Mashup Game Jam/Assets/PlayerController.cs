@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Portal")
         {
             manager.ToRoom(other.GetComponent<Portal>().portalNum);
-            money += 10;
         }
 
         // If colliding with the shop, open the shop UI
