@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    public int money = 0;
+
     [SerializeField] private float speed;
 
     private bool active = true;
@@ -11,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
 
     [SerializeField] private GameObject shopUI;
+    [SerializeField] private TextMeshProUGUI shopMoneyText;
 
     private GameManager manager;
 
@@ -31,11 +36,13 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Portal")
         {
             manager.ToRoom(other.GetComponent<Portal>().portalNum);
+            money += 10;
         }
 
         // If colliding with the shop, open the shop UI
         if (other.tag == "Shop")
         {
+            shopMoneyText.text = $"You have {money} money";
             shopUI.SetActive(true);
             active = false;
         }

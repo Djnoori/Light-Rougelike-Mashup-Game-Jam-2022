@@ -14,11 +14,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Vector2[] playerPos = new Vector2[10];
     [SerializeField] private Vector2[] cameraPos = new Vector2[10];
 
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-    }
-
     void Start()
     {
         player = FindObjectOfType<PlayerController>().gameObject;
