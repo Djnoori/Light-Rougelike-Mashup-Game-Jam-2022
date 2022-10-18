@@ -30,20 +30,23 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionStay2D(Collision2D other)
     {
-        // If colliding with a portal, go to the room assigned to the portal
-        if (other.tag == "Portal")
-        {
-            manager.ToRoom(other.GetComponent<Portal>().portalNum);
-        }
-
         // If colliding with the shop, open the shop UI
-        if (other.tag == "Shop")
+        if (other.gameObject.tag == "Shop" && Input.GetKey(KeyCode.Space))
         {
-            shopMoneyText.text = $"You have {money} money";
+            shopMoneyText.text = $"You have {money} diamonds";
             shopUI.SetActive(true);
             active = false;
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        // If colliding with a portal, go to the room assigned to the portal
+        if (other.tag == "Portal" && Input.GetKey(KeyCode.Space))
+        {
+            manager.ToRoom(other.GetComponent<Portal>().portalNum);
         }
     }
 

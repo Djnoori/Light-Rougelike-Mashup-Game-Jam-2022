@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     private List<int> portalNums = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     [SerializeField] private GameObject[] portals = new GameObject[10];
+    [SerializeField] private GameObject[] enemyHolders = new GameObject[10];
 
     [SerializeField] private Vector2[] playerPos = new Vector2[10];
     [SerializeField] private Vector2[] cameraPos = new Vector2[10];
@@ -32,5 +33,9 @@ public class GameManager : MonoBehaviour
     {
         player.transform.position = new Vector3(playerPos[num - 1].x, playerPos[num - 1].y, player.transform.position.z);
         cam.transform.position = new Vector3(cameraPos[num - 1].x, cameraPos[num - 1].y, cam.transform.position.z);
+        foreach (Transform child in enemyHolders[num - 1].transform)
+        {
+            child.GetComponent<EnemyAI>().active = true;
+        }
     }
 }

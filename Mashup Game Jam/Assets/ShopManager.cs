@@ -70,7 +70,7 @@ public class ShopManager : MonoBehaviour
             else
             {
                 StartCoroutine(UpgradeTextToDefault(upgrade1Text, upgrade1Text.text, upgradeTextToDefaultTime));
-                upgrade1Text.text = "Not enough money!";
+                upgrade1Text.text = "Not enough diamonds!";
             }
         }
         else if (upgrade == 2)
@@ -84,7 +84,7 @@ public class ShopManager : MonoBehaviour
             else
             {
                 StartCoroutine(UpgradeTextToDefault(upgrade2Text, upgrade2Text.text, upgradeTextToDefaultTime));
-                upgrade2Text.text = "Not enough money!";
+                upgrade2Text.text = "Not enough diamonds!";
             }
         }
         else if (upgrade == 3)
@@ -98,7 +98,7 @@ public class ShopManager : MonoBehaviour
             else
             {
                 StartCoroutine(UpgradeTextToDefault(upgrade3Text, upgrade3Text.text, upgradeTextToDefaultTime));
-                upgrade3Text.text = "Not enough money!";
+                upgrade3Text.text = "Not enough diamonds!";
             }
         }
         moneyText.text = $"You have {playerController.money} money";
