@@ -7,6 +7,8 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     public int money = 0;
+    public int health;
+    public int maxHealth;
 
     [SerializeField] private float speed;
 
@@ -16,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject shopUI;
     [SerializeField] private TextMeshProUGUI shopMoneyText;
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private TextMeshProUGUI healthText;
 
     private GameManager manager;
 
@@ -23,11 +27,27 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         manager = FindObjectOfType<GameManager>();
+
+        // Things needed to be done on initialization (not variable caching)
+        healthBar.maxValue = maxHealth;
+        healthBar.value = health;
+        healthText.text = $"{health} / {maxHealth}";
     }
 
     void Update()
     {
         Move();
+        if (health <= 0)
+        {
+            active = false;
+        }
+    }
+
+    public void DamagePlayer(int damage)
+    {
+        health -= damage;
+        healthBar.value = health;
+        healthText.text = $"{health} / {maxHealth}";
     }
 
     void OnCollisionStay2D(Collision2D other)
@@ -56,7 +76,6 @@ public class PlayerController : MonoBehaviour
         float hMove = Input.GetAxisRaw("Horizontal");
         float vMove = Input.GetAxisRaw("Vertical");
 
-        // Isn't it crazy that vMove has two Vs in it? Vs are pretty rare tbh
         if (active == true)
         {
             rb.velocity = new Vector2(hMove * speed, vMove * speed);

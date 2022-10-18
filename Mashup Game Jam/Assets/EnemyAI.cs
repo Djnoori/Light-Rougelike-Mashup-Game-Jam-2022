@@ -5,12 +5,16 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
+    public int damage;
+    public float attackCooldown;
+
     public bool active = false;
+    private bool canAttack = true;
 
-    protected Rigidbody2D rb;
-    protected NavMeshAgent agent;
+    private Rigidbody2D rb;
+    private NavMeshAgent agent;
 
-    protected GameObject player;
+    private GameObject player;
 
     void Start()
     {
@@ -20,5 +24,21 @@ public class EnemyAI : MonoBehaviour
         agent.updateUpAxis = false;
 
         player = FindObjectOfType<PlayerController>().gameObject;
+    }
+
+    void OnCollisionStay2D(Collision2D other)
+    {
+        // Attack the player if the attack cooldown is over
+        if (other.gameObject.tag == "Player" && canAttack)
+        {
+            other.gameObject.GetComponent<PlayerController>().DamagePlayer(damage);
+            canAttack = false;
+            Invoke("AttackCooldownOver", attackCooldown);
+        }
+    }
+
+    private void AttackCooldownOver()
+    {
+        canAttack = true;
     }
 }
