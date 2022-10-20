@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public int maxHealth;
     public float speed;
 
+    public bool flipped;
+
     private bool active = true;
 
     private Rigidbody2D rb;
@@ -79,6 +81,20 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.velocity = new Vector2(0, 0);
+        }
+    }
+
+    void Look()
+    {
+        if (Input.mousePosition.x > transform.position.x)
+        {
+            flipped = false;
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+        else
+        {
+            flipped = true;
+            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
     }
 
