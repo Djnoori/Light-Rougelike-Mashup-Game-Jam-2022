@@ -9,8 +9,7 @@ public class PlayerController : MonoBehaviour
     public int money = 0;
     public int health;
     public int maxHealth;
-
-    [SerializeField] private float speed;
+    public float speed;
 
     private bool active = true;
 
@@ -29,9 +28,7 @@ public class PlayerController : MonoBehaviour
         manager = FindObjectOfType<GameManager>();
 
         // Things needed to be done on initialization (not variable caching)
-        healthBar.maxValue = maxHealth;
-        healthBar.value = health;
-        healthText.text = $"{health} / {maxHealth}";
+        UpdateHealth();
     }
 
     void Update()
@@ -46,8 +43,7 @@ public class PlayerController : MonoBehaviour
     public void DamagePlayer(int damage)
     {
         health -= damage;
-        healthBar.value = health;
-        healthText.text = $"{health} / {maxHealth}";
+        UpdateHealth();
     }
 
     void OnCollisionStay2D(Collision2D other)
@@ -91,5 +87,12 @@ public class PlayerController : MonoBehaviour
     {
         shopUI.SetActive(false);
         active = true;
+    }
+
+    public void UpdateHealth()
+    {
+        healthBar.maxValue = maxHealth;
+        healthBar.value = health;
+        healthText.text = $"{health} / {maxHealth}";
     }
 }

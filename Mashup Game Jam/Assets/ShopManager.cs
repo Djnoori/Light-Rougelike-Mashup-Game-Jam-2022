@@ -48,31 +48,11 @@ public class ShopManager : MonoBehaviour
     // Shuffles the shop upgrades
     public void ShuffleUpgrades()
     {
-        // WEIRD ERRORS
+        // Set the bought variables to false
+        upgrade1Bought = false;
+        upgrade2Bought = false;
+        upgrade3Bought = false;
 
-        // Make a new list without the sold upgrades
-        /*
-        private List<string> tempNames = new List<string>();
-        private List<int> tempCosts = new List<int>();
-        for (int i = 0; i < upgradeNames.Count; i++)
-        {
-            if (i = upgrade1 && upgrade1Bought)
-            {
-                continue;
-            }
-            else if (i = upgrade2 && upgrade2Bought)
-            {
-                continue;
-            }
-            else if (i = upgrade3 && upgrade3Bought)
-            {
-                continue;
-            }
-            tempNames.append(upgradeNames[i]);
-            tempCosts.append(upgradeCosts[i]);
-        }
-        */
-        
         // Generate three different random numbers within the bounds of the arrays
         upgrade1 = Random.Range(0, upgradeNames.Count);
         upgrade2 = Random.Range(0, upgradeNames.Count);
@@ -104,6 +84,7 @@ public class ShopManager : MonoBehaviour
                 upgrade1Bought = true;
                 upgrade1Text.text = "Sold!";
                 playerController.money -= cost;
+                AddUpgrade(upgradeNames[upgrade1], upgradeCosts[upgrade1]);
             }
             else
             {
@@ -119,6 +100,7 @@ public class ShopManager : MonoBehaviour
                 upgrade2Bought = true;
                 upgrade2Text.text = "Sold!";
                 playerController.money -= cost;
+                AddUpgrade(upgradeNames[upgrade2], upgradeCosts[upgrade2]);
             }
             else
             {
@@ -134,6 +116,7 @@ public class ShopManager : MonoBehaviour
                 upgrade3Bought = true;
                 upgrade3Text.text = "Sold!";
                 playerController.money -= cost;
+                AddUpgrade(upgradeNames[upgrade3], upgradeCosts[upgrade3]);
             }
             else
             {
@@ -143,9 +126,62 @@ public class ShopManager : MonoBehaviour
         }
         moneyText.text = $"You have {playerController.money} money";
     }
+    
+    // Gives the player the buff
+    private void AddUpgrade(string name, int cost)
+    {
+        if (name.Contains("Speed"))
+        {
+            if (name.Contains("2"))
+            {
+                playerController.speed += 2;
+            }
+            else
+            {
+                playerController.speed += 1;
+            }
+        }
+        else if (name.Contains("Health"))
+        {
+            if (name.Contains("2"))
+            {
+                playerController.maxHealth += 20;
+                playerController.health += 20;
+                playerController.UpdateHealth();
+            }
+            else
+            {
+                playerController.maxHealth += 10;
+                playerController.health += 10;
+                playerController.UpdateHealth();
+            }
+        }
+        else if (name.Contains("Damage"))
+        {
+            if (name.Contains("2"))
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else if (name.Contains("Coins"))
+        {
+            if (name.Contains("2"))
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+    }
 
     // Switches the upgrade button's text back to default; connected to BuyUpgrade()
-    private IEnumerator UpgradeTextToDefault(TextMeshProUGUI upgrade, string defaultText, float time)
+    IEnumerator UpgradeTextToDefault(TextMeshProUGUI upgrade, string defaultText, float time)
     {
         yield return new WaitForSeconds(time);
         upgrade.text = defaultText;
