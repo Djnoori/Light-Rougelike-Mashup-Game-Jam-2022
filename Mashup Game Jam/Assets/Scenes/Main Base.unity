@@ -10306,6 +10306,7 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   speed: 4
+  flipped: 0
   shopUI: {fileID: 209615292}
   shopMoneyText: {fileID: 25602046}
   healthBar: {fileID: 93784989}
