@@ -323,7 +323,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &25602047
@@ -625,17 +625,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeTextToDefaultTime: 1
   upgradeNames:
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
-  - 6
-  - 7
-  - 8
-  - 9
-  - 10
-  upgradeCosts: 0a000000090000000800000007000000060000000500000004000000030000000200000001000000
+  - Speed +1
+  - Speed +1
+  - Speed +2
+  - Health +1
+  - Health +1
+  - Health +2
+  - Damage +1
+  - Damage +1
+  - Damage +2
+  - Coins +1
+  - Coins +1
+  - Coins +2
+  upgradeCosts: 0a0000000a000000190000000a0000000a000000190000000a0000000a000000190000000a0000000a00000019000000
 --- !u!1 &293707450
 GameObject:
   m_ObjectHideFlags: 0
@@ -8684,7 +8686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595c0fc7dcb631e4db1e9f8921127b24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 25
   attackCooldown: 1
   active: 0
 --- !u!195 &781893268
@@ -9185,7 +9187,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &870749025
@@ -10026,7 +10028,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1289188331
@@ -10301,8 +10303,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   money: 0
-  health: 3
-  maxHealth: 3
+  health: 100
+  maxHealth: 100
   speed: 4
   shopUI: {fileID: 209615292}
   shopMoneyText: {fileID: 25602046}
@@ -10756,7 +10758,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1708183712
@@ -33477,7 +33479,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &2137542899

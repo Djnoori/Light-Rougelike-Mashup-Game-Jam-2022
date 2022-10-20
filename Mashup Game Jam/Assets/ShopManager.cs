@@ -11,9 +11,12 @@ public class ShopManager : MonoBehaviour
     private int upgrade1;
     private int upgrade2;
     private int upgrade3;
+    private bool upgrade1Bought = false;
+    private bool upgrade2Bought = false;
+    private bool upgrade3Bought = false;
 
-    [SerializeField] private string[] upgradeNames = new string[10];
-    [SerializeField] private int[] upgradeCosts = new int[10];
+    [SerializeField] private List<string> upgradeNames = new List<string>();
+    [SerializeField] private List<int> upgradeCosts = new List<int>();
 
     private TextMeshProUGUI upgrade1Text;
     private TextMeshProUGUI upgrade2Text;
@@ -33,20 +36,54 @@ public class ShopManager : MonoBehaviour
         ShuffleUpgrades();
     }
 
+    void Update()
+    {
+        // TEMPORARY
+        if (Input.GetKey("j"))
+        {
+            ShuffleUpgrades();
+        }
+    }
+
     // Shuffles the shop upgrades
     public void ShuffleUpgrades()
     {
+        // WEIRD ERRORS
+
+        // Make a new list without the sold upgrades
+        /*
+        private List<string> tempNames = new List<string>();
+        private List<int> tempCosts = new List<int>();
+        for (int i = 0; i < upgradeNames.Count; i++)
+        {
+            if (i = upgrade1 && upgrade1Bought)
+            {
+                continue;
+            }
+            else if (i = upgrade2 && upgrade2Bought)
+            {
+                continue;
+            }
+            else if (i = upgrade3 && upgrade3Bought)
+            {
+                continue;
+            }
+            tempNames.append(upgradeNames[i]);
+            tempCosts.append(upgradeCosts[i]);
+        }
+        */
+        
         // Generate three different random numbers within the bounds of the arrays
-        upgrade1 = Random.Range(0, upgradeNames.Length);
-        upgrade2 = Random.Range(0, upgradeNames.Length);
+        upgrade1 = Random.Range(0, upgradeNames.Count);
+        upgrade2 = Random.Range(0, upgradeNames.Count);
         while (upgrade2 == upgrade1)
         {
-            upgrade2 = Random.Range(0, upgradeNames.Length);
+            upgrade2 = Random.Range(0, upgradeNames.Count);
         }
-        upgrade3 = Random.Range(0, upgradeNames.Length);
+        upgrade3 = Random.Range(0, upgradeNames.Count);
         while (upgrade3 == upgrade1 || upgrade3 == upgrade2)
         {
-            upgrade3 = Random.Range(0, upgradeNames.Length);
+            upgrade3 = Random.Range(0, upgradeNames.Count);
         }
 
         // Set the three upgrade names and costs
@@ -59,12 +96,13 @@ public class ShopManager : MonoBehaviour
     // Not changing the text to "Not enough money!" at the moment. Very confused.
     public void BuyUpgrade(int upgrade)
     {
-        if (upgrade == 1)
+        if (upgrade == 1 && !upgrade1Bought)
         {
             int cost = upgradeCosts[upgrade1];
             if (playerController.money >= cost)
             {
-                Debug.Log($"You bought {upgradeNames[upgrade1]} for {cost} money");
+                upgrade1Bought = true;
+                upgrade1Text.text = "Sold!";
                 playerController.money -= cost;
             }
             else
@@ -73,12 +111,13 @@ public class ShopManager : MonoBehaviour
                 upgrade1Text.text = "Not enough diamonds!";
             }
         }
-        else if (upgrade == 2)
+        else if (upgrade == 2 && !upgrade2Bought)
         {
             int cost = upgradeCosts[upgrade2];
             if (playerController.money >= cost)
             {
-                Debug.Log($"You bought {upgradeNames[upgrade2]} for {cost} money");
+                upgrade2Bought = true;
+                upgrade2Text.text = "Sold!";
                 playerController.money -= cost;
             }
             else
@@ -87,12 +126,13 @@ public class ShopManager : MonoBehaviour
                 upgrade2Text.text = "Not enough diamonds!";
             }
         }
-        else if (upgrade == 3)
+        else if (upgrade == 3 && !upgrade3Bought)
         {
             int cost = upgradeCosts[upgrade3];
             if (playerController.money >= cost)
             {
-                Debug.Log($"You bought {upgradeNames[upgrade3]} for {cost} money");
+                upgrade3Bought = true;
+                upgrade3Text.text = "Sold!";
                 playerController.money -= cost;
             }
             else
